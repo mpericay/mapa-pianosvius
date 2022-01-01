@@ -31,8 +31,7 @@ html, body, #map {
     position: absolute;
     top: 15px;
     left: 15px;
-    width: 64px;
-    height: 64px;
+    width: 140px;
 }
 
 .logo img {

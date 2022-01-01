@@ -1,5 +1,5 @@
 const readColors = () =>
-  fetch('https://sheets.googleapis.com/v4/spreadsheets/1fjBWJjionkbsll_YdisD31Houzxcu1nwTbNCVBWvitY/values/Tipus?valueRenderOption=UNFORMATTED_VALUE&key=AIzaSyDZR5KUCYmbQdp6srPiGP6qLhtzZEeq8r4')
+  fetch('https://sheets.googleapis.com/v4/spreadsheets/1MXQAF1dtUoVCOgXvuQVKGGg8gywZAku9vXAZdZLZbbY/values/Tipus?valueRenderOption=UNFORMATTED_VALUE&key=AIzaSyDeHMuLNAQMjRysQC2vQ-C5Y_Sppyzhypc')
   .then(response => response.json())                    // Obté full de càlcul en JSON
   .then(spreadsheet => spreadsheet.values.slice(1))     // Elimina la capçalera
   .then(rows => rows.reduce(
@@ -9,7 +9,7 @@ const readColors = () =>
     }, {}));
 
 const readFeatures = () =>
-  fetch('https://sheets.googleapis.com/v4/spreadsheets/1fjBWJjionkbsll_YdisD31Houzxcu1nwTbNCVBWvitY/values/Locals?valueRenderOption=UNFORMATTED_VALUE&key=AIzaSyDZR5KUCYmbQdp6srPiGP6qLhtzZEeq8r4')
+  fetch('https://sheets.googleapis.com/v4/spreadsheets/1MXQAF1dtUoVCOgXvuQVKGGg8gywZAku9vXAZdZLZbbY/values/Pianos?valueRenderOption=UNFORMATTED_VALUE&key=AIzaSyDeHMuLNAQMjRysQC2vQ-C5Y_Sppyzhypc')
   .then(response => response.json())                    // Obté full de càlcul en JSON
   .then(spreadsheet => spreadsheet.values.slice(1))     // Elimina la capçalera
   .then(rows => rows
@@ -43,8 +43,9 @@ const readData = Promise.all([readColors(), readFeatures()]);
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'https://geoserveis.icgc.cat/contextmaps/positron.json',
-  center: [2.25, 41.93],
-  zoom: 10,
+  center: [2.169, 41.4],
+  zoom: 12,
+  //bearing: -44,
   hash: true
 });
 
@@ -52,7 +53,7 @@ map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
 map.on('load', () => {
   readData.then(([colors, features]) => {
-    map.addSource('comerços', {
+    map.addSource('pianos', {
       type: 'geojson',
       data: features
     });
@@ -62,7 +63,7 @@ map.on('load', () => {
     map.addLayer({
       id: 'punts',
       type: 'circle',
-      source: 'comerços',
+      source: 'pianos',
       layout: {
       },
       paint: {
@@ -80,7 +81,7 @@ map.on('load', () => {
     map.addLayer({
       id: 'etiquetes',
       type: 'symbol',
-      source: 'comerços',
+      source: 'pianos',
       layout: {
         'text-field': ['get', 'nom'],
         'text-font': ['Open Sans Semibold'],   // Tipografies disponibles: https://geoserveis.icgc.cat/contextmaps/glyphs/
