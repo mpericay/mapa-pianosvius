@@ -1,3 +1,2 @@
-# Mapa de Comerços Residu Zero a Osona
+# Mapa de Pianos públics a Barcelona i voltants
 
-https://fonts.cat/residuzeroosona
