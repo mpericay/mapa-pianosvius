@@ -42,7 +42,7 @@ const readData = Promise.all([readColors(), readFeatures()]);
 
 const map = new mapboxgl.Map({
   container: 'map',
-  style: 'https://geoserveis.icgc.cat/contextmaps/positron.json',
+  style: 'https://geoserveis.icgc.cat/contextmaps/icgc_mapa_base_gris.json',
   center: [2.162, 41.387],
   zoom: 12,
   //bearing: -44,
